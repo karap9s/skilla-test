@@ -54,12 +54,6 @@ body {
   --UI-green: #28a879;
   --UI-light-green: #dbf8ef;
   --text-green: #00a775;
-
-  /* --table-shadow: 0px 4px 5px 0px #e9edf3; */
-  --table-shadow: 0px 4px 5px 0px #e9edf3;
-
-  --base-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2),
-    0px 2px 30px 0px rgba(0, 0, 0, 0.06), 0px 0px 15px 0px rgba(0, 0, 0, 0.03);
 }
 
 .dark {

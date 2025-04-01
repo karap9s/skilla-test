@@ -77,7 +77,9 @@ const CallsTable: FC = (): JSX.Element => {
             {tableHeads.map((head, index) => (
               <TableHead
                 className={cn(
-                  'text-secondary text-[14px] px-0 pt-6 pb-5',
+                  'h-fit',
+                  'text-secondary text-[14px]',
+                  'px-0 pt-6 pb-5',
                   !index && 'pl-10',
                   index === tableHeads.length - 1 && 'pr-5 flex justify-end'
                 )}

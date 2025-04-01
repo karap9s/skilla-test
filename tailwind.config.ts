@@ -1,13 +1,13 @@
-import {heroui} from '@heroui/theme';
+import { heroui } from '@heroui/theme';
 import type { Config } from 'tailwindcss';
 
 module.exports = {
   plugins: [heroui()],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./node_modules/@heroui/theme/dist/components/(date-picker|button|ripple|spinner|calendar|date-input|form|popover).js"
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './node_modules/@heroui/theme/dist/components/(date-picker|button|ripple|spinner|calendar|date-input|form|popover).js',
   ],
   theme: {
     extend: {
@@ -17,10 +17,6 @@ module.exports = {
           text: 'var(--text-text)',
           green: 'var(--text-green)',
         },
-      },
-      boxShadow: {
-        table: 'var(--table-shadow)',
-        baseShadow: 'var(--base-shadow)',
       },
     },
   },
