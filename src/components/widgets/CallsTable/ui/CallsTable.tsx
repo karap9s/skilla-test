@@ -67,16 +67,19 @@ const CallsTable: FC = (): JSX.Element => {
   }, [calls, filters]);
 
   return (
-    <div className="select-none w-full max-w-[1024px] mx-auto shadow-table">
+    <div
+      className="select-none w-full max-w-[1440px] mx-auto bg-white rounded-xl mb-30"
+      style={{ boxShadow: '0px 4px 5px 0px #e9edf3' }}
+    >
       <Table>
         <TableHeader>
           <TableRow>
             {tableHeads.map((head, index) => (
               <TableHead
                 className={cn(
-                  'text-secondary text-[14px] px-0',
+                  'text-secondary text-[14px] px-0 pt-6 pb-5',
                   !index && 'pl-10',
-                  index === tableHeads.length - 1 && 'pr-10'
+                  index === tableHeads.length - 1 && 'pr-5 flex justify-end'
                 )}
                 key={`${head.title}-${index}`}
               >
@@ -123,7 +126,7 @@ const CallsTable: FC = (): JSX.Element => {
             <TableRow
               className={cn(
                 'py-2.5 hover:cursor-pointer hover:bg-[#D4DFF32B]',
-                '[&>td]:w-fit [&>td]:h-fit [&>td]:px-0 [&>td]:py-4',
+                '[&>td]:w-fit [&>td]:h-fit [&>td]:px-0 [&>td]:py-3',
                 '[&>td:first-child]:pl-10 [&>td:last-child]:pr-10'
               )}
               key={`${call.id}-${index}`}
