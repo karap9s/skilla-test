@@ -29,7 +29,7 @@ const CallsTableBody: FC<CallsTableBodyProps> = ({ calls }) => {
       {sortedDates.map((date) => (
         <React.Fragment key={date}>
           {formatDateHeader(date) !== 'Сегодня' && (
-            <TableRow className="border-t border-b border-[#EAF0FA]">
+            <TableRow className="border-t border-b border-[#EAF0FA] hover:bg-transparent">
               <TableCell
                 colSpan={7}
                 className="px-10 pt-10 pb-4 text-[#122945] font-medium"

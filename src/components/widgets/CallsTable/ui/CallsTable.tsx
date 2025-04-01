@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import CallsTableHeader from './CallsTableHeader';
 import CallsTableBody from './CallsTableBody';
 import CallsTableLoader from './CallsTableLoader';
+import { sortCalls } from '../model/functions';
 
 const CallsTable: FC = (): JSX.Element => {
   const callsStore = createSelectors(useCallsStore);
@@ -27,13 +28,18 @@ const CallsTable: FC = (): JSX.Element => {
   };
 
   const filteredCalls = useMemo(() => {
-    return calls?.filter((call) => {
+    if (!calls?.length) return [];
+
+    // Фильтруем звонки по типу
+    const filtered = calls.filter((call) => {
       if (filters.in_out?.length) {
         return Number(call.in_out) === Number(filters?.in_out);
       }
-
       return true;
     });
+
+    // Используем вынесенную функцию сортировки
+    return sortCalls(filtered, filters.sort_by, filters.order);
   }, [calls, filters]);
 
   if (isLoading && !filteredCalls?.length) {

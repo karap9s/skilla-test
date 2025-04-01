@@ -94,13 +94,10 @@ export const formatDateHeader = (dateStr: string): string => {
   if (!dateStr) return '';
 
   const date = new Date(dateStr);
-  const today = new Date();
   const yesterday = new Date();
   yesterday.setDate(yesterday.getDate() - 1);
 
-  if (date.toDateString() === today.toDateString()) {
-    return 'Сегодня';
-  } else if (date.toDateString() === yesterday.toDateString()) {
+  if (date.toDateString() === yesterday.toDateString()) {
     return 'Вчера';
   } else {
     const day = date.getDate().toString().padStart(2, '0');
@@ -108,4 +105,30 @@ export const formatDateHeader = (dateStr: string): string => {
     const year = date.getFullYear();
     return `${day}.${month}.${year}`;
   }
+};
+
+// Сортировка звонков по параметрам
+export const sortCalls = <T extends { date: string; time: number }>(
+  calls: Array<T>,
+  sortBy: 'date' | 'duration' | '',
+  order: 'ASC' | 'DESC' | ''
+): Array<T> => {
+  if (!calls?.length) return [];
+
+  return [...calls].sort((a, b) => {
+    if (sortBy === 'date') {
+      const dateA = new Date(a.date).getTime();
+      const dateB = new Date(b.date).getTime();
+      return order === 'ASC' ? dateA - dateB : dateB - dateA;
+    }
+
+    if (sortBy === 'duration') {
+      return order === 'ASC' ? a.time - b.time : b.time - a.time;
+    }
+
+    // По умолчанию сортируем по дате в обратном порядке (новые сверху)
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  });
 };
