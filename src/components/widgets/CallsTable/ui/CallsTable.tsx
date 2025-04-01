@@ -21,6 +21,7 @@ import {
 } from '@/components/widgets/CallsTable/model/functions';
 import { cn } from '@/lib/utils';
 import { FC, JSX, useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 interface TableHead {
   title: string;
@@ -43,6 +44,7 @@ const CallsTable: FC = (): JSX.Element => {
   const calls = callsStore.use.calls();
   const filters = callsStore.use.filters();
   const updateFilter = callsStore.use.updateFilter();
+  const isLoading = callsStore.use.isLoading();
 
   const handleSort = (sortKey?: string) => {
     if (!sortKey) return;
@@ -66,11 +68,36 @@ const CallsTable: FC = (): JSX.Element => {
     });
   }, [calls, filters]);
 
+  if (isLoading && !filteredCalls?.length) {
+    return (
+      <div
+        className="flex justify-center items-center h-60 w-full max-w-[1440px] mx-auto bg-white rounded-xl mb-30"
+        style={{ boxShadow: '0px 4px 5px 0px #e9edf3' }}
+      >
+        <div className="flex flex-col items-center">
+          <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mb-2"></div>
+          <p className="text-secondary">Загрузка данных...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div
-      className="select-none w-full max-w-[1440px] mx-auto bg-white rounded-xl mb-30"
+    <motion.div
+      className="select-none w-full max-w-[1440px] mx-auto bg-white rounded-xl mb-30 relative"
       style={{ boxShadow: '0px 4px 5px 0px #e9edf3' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
     >
+      {isLoading && filteredCalls?.length && (
+        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex justify-center items-center">
+          <div className="flex flex-col items-center bg-white p-4 rounded-lg shadow-md">
+            <div className="w-10 h-10 border-4 border-blue-400 border-t-transparent rounded-full animate-spin mb-2"></div>
+            <p className="text-secondary font-medium">Загрузка данных...</p>
+          </div>
+        </div>
+      )}
       <Table>
         <TableHeader>
           <TableRow>
@@ -183,7 +210,7 @@ const CallsTable: FC = (): JSX.Element => {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </motion.div>
   );
 };
 
