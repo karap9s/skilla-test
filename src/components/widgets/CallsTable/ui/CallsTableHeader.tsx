@@ -16,7 +16,7 @@ const CallsTableHeader: FC<CallsTableHeaderProps> = ({
   onSort,
 }) => {
   return (
-    <TableHeader>
+    <TableHeader className="sticky top-0 z-10 bg-white">
       <TableRow>
         {tableHeads.map((head, index) => (
           <TableHead

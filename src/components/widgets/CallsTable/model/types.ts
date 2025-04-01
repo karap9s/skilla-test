@@ -1,9 +1,14 @@
-import { GetListData, Order, SortBy } from '@/components/entities/calls';
+import {
+  CallFilters,
+  GetListData,
+  Order,
+  SortBy,
+} from '@/components/entities/calls';
 
 export interface TableHead {
   title: string;
   hasArrow?: boolean;
-  sortKey?: 'date' | 'duration';
+  sortKey?: SortBy;
 }
 
 export interface CallsTableProps {
@@ -14,5 +19,8 @@ export interface CallsTableProps {
     sort_by?: SortBy;
     order?: Order;
   };
-  updateFilter?: (key: string, value: any) => void;
+  updateFilter?: <K extends keyof CallFilters>(
+    key: K,
+    value: CallFilters[K]
+  ) => void;
 }

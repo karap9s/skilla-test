@@ -65,15 +65,24 @@ export const Dropdown: FC<DropdownProps> = ({
             )}
             key={item.value}
             onClick={item.onClick}
+            onSelect={
+              items?.length - 1 === index && isDatePicker
+                ? (event) => event.preventDefault()
+                : undefined
+            }
           >
             <div className="flex flex-col">
               {item.label}
-              {items?.length - 1 === index && isDatePicker && (
+              {/* {items?.length - 1 === index && isDatePicker && (
                 <DateRangePicker
                   autoFocus
-                  classNames={{ inputWrapper: 'px-0' }}
+                  className="max-w-xs"
+                  classNames={{
+                    inputWrapper: 'px-0',
+                    calendar: 'bg-white text-black',
+                  }}
                 />
-              )}
+              )} */}
             </div>
           </DropdownMenuItem>
         ))}

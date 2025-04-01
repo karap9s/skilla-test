@@ -61,6 +61,14 @@ export interface PartnerData {
   phone: string;
 }
 
+export interface Stage {
+  person_name: string;
+  person_surname: string;
+  person_mango_phone: string;
+  duration: string;
+  disconnect_reason: string;
+}
+
 export interface GetListData {
   id: number;
   partnership_id: string;
@@ -83,7 +91,7 @@ export interface GetListData {
   errors: Array<string>;
   disconnect_reason: string;
   results: Array<string>;
-  stages: Array<any>;
+  stages: Array<Stage>;
   abuse?: Abuse;
   contact_name: string;
   contact_company: string;

@@ -1,3 +1,4 @@
+import { GetListData } from '@/components/entities/calls';
 import { TableHead } from '@/components/widgets/CallsTable/model/types';
 
 export const tableHeads: TableHead[] = [
@@ -72,4 +73,39 @@ export const formatTime = (timeString: string): string => {
   }
 
   return timeString;
+};
+
+// Группировка звонков по дням
+export const groupCallsByDay = (
+  calls: GetListData[]
+): Record<string, GetListData[]> => {
+  return calls?.reduce((acc: Record<string, GetListData[]>, call) => {
+    const date = call.date_notime;
+    if (!acc[date]) {
+      acc[date] = [];
+    }
+    acc[date].push(call);
+    return acc;
+  }, {});
+};
+
+// Форматирование даты для заголовка группы
+export const formatDateHeader = (dateStr: string): string => {
+  if (!dateStr) return '';
+
+  const date = new Date(dateStr);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (date.toDateString() === today.toDateString()) {
+    return 'Сегодня';
+  } else if (date.toDateString() === yesterday.toDateString()) {
+    return 'Вчера';
+  } else {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
 };
