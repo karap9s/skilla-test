@@ -1,3 +1,15 @@
+import { TableHead } from '@/components/widgets/CallsTable/model/types';
+
+export const tableHeads: TableHead[] = [
+  { title: 'Тип' },
+  { title: 'Время', hasArrow: true, sortKey: 'date' },
+  { title: 'Сотрудник' },
+  { title: 'Звонок' },
+  { title: 'Источник' },
+  { title: 'Оценка' },
+  { title: 'Длительность', hasArrow: true, sortKey: 'duration' },
+];
+
 export const getRandomVariant = () => {
   const randomValue = Math.random();
 

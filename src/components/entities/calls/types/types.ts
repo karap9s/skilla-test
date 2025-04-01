@@ -1,3 +1,11 @@
+export type Order = 'ASC' | 'DESC' | '';
+
+export type SortBy = 'date' | 'duration' | '';
+
+export type CallType = 'incoming' | 'outgoing' | 'missed' | 'notAnswered';
+
+export type IN_OUT = '0' | '1' | '';
+
 export interface GetRecordProps {
   record: string;
   partnership_id: string;
@@ -6,11 +14,11 @@ export interface GetRecordProps {
 export interface GetListRequestProps {
   date_start: string;
   date_end: string;
-  in_out?: '0' | '1' | '';
+  in_out?: IN_OUT;
   limit?: number;
   offset?: number;
-  sort_by?: 'date' | 'duration';
-  order?: 'ASC' | 'DESC';
+  sort_by?: SortBy;
+  order?: Order;
   status?: 'success' | 'fail';
   from_type?: Array<'clients' | 'new_clients' | 'workers' | 'app'>;
   from_persons?: Array<number>;
@@ -90,15 +98,13 @@ export interface GetListResponse {
   results: Array<GetListData>;
 }
 
-export type IN_OUT = 'incoming' | 'outgoing' | 'missed' | 'notAnswered';
-
 export interface CallFilters {
   date_start: string;
   date_end: string;
-  in_out: '0' | '1' | '';
+  in_out: IN_OUT;
   search: string;
-  sort_by: 'date' | 'duration' | '';
-  order: 'ASC' | 'DESC' | '';
+  sort_by: SortBy;
+  order: Order;
 }
 
 export interface CallStore {

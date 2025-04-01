@@ -6,6 +6,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { DateRangePicker } from '@heroui/date-picker';
 import { FC, ReactNode, useState } from 'react';
 
 export interface DropdownItem {
@@ -19,6 +20,7 @@ export interface DropdownProps {
   items: DropdownItem[];
   className?: string;
   selectedValue?: string;
+  isDatePicker?: boolean;
 }
 
 export const Dropdown: FC<DropdownProps> = ({
@@ -26,6 +28,7 @@ export const Dropdown: FC<DropdownProps> = ({
   items,
   className,
   selectedValue,
+  isDatePicker = false,
 }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -39,22 +42,39 @@ export const Dropdown: FC<DropdownProps> = ({
         )}
       >
         {trigger}{' '}
-        <FilterArrow
-          color={isOpen ? '#002CFB' : '#ADBFDF'}
-          className={cn('transition-transform', !isOpen && 'rotate-180')}
-        />
+        {!isDatePicker && (
+          <FilterArrow
+            color={isOpen ? '#002CFB' : '#ADBFDF'}
+            className={cn('transition-transform', !isOpen && 'rotate-180')}
+          />
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {items.map((item) => (
+        {items.map((item, index) => (
           <DropdownMenuItem
             className={cn(
+              'py-1.5 px-3',
               'hover:cursor-pointer hover:bg-[#DEE4FF]',
-              selectedValue === item.value && 'text-[#015EF5]'
+              isDatePicker && [
+                'px-5 text-[14px]',
+                selectedValue === item.value
+                  ? 'text-[#015EF5] hover:text-[#015EF5]'
+                  : 'text-[#899CB1] hover:text-[#2B2D33]',
+              ],
+              !isDatePicker && selectedValue === item.value && 'text-[#015EF5]'
             )}
             key={item.value}
             onClick={item.onClick}
           >
-            {item.label}
+            <div className="flex flex-col">
+              {item.label}
+              {items?.length - 1 === index && isDatePicker && (
+                <DateRangePicker
+                  autoFocus
+                  classNames={{ inputWrapper: 'px-0' }}
+                />
+              )}
+            </div>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

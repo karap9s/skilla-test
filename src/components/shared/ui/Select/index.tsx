@@ -61,7 +61,7 @@ export const Select: FC<DateRangeSelectorProps> = ({
           >
             <div className="flex flex-col">
               {option.label}
-              {options?.length - 1 === index && <DateRangePicker />}
+              {options?.length - 1 === index && <DateRangePicker autoFocus />}
             </div>
           </SelectItem>
         ))}

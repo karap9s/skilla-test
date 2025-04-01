@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Dropdown } from '@/components/shared/ui';
-import { CallFilters } from '@/components/entities/calls';
+import { IN_OUT } from '@/components/entities/calls';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export interface CallTypeFilterProps {
-  selectedType: CallFilters['in_out'];
-  onTypeChange: (type: CallFilters['in_out']) => void;
+  selectedType: IN_OUT;
+  onTypeChange: (type: IN_OUT) => void;
   className?: string;
 }
 
@@ -17,9 +17,9 @@ export const CallTypeFilter: FC<CallTypeFilterProps> = ({
   onTypeChange,
   className,
 }) => {
-  const allTypes: Array<CallFilters['in_out']> = ['', '0', '1'];
+  const allTypes: Array<IN_OUT> = ['', '0', '1'];
 
-  const typeLabels: Record<CallFilters['in_out'], string> = {
+  const typeLabels: Record<IN_OUT, string> = {
     '': 'Все типы',
     '0': 'Исходящие',
     '1': 'Входящие',

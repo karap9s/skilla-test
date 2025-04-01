@@ -16,11 +16,11 @@ const MainPage: FC = (): JSX.Element => {
   }, [filters, fetchAndProcessCalls]);
 
   return (
-    <div>
+    <>
       <FilterCalls />
 
       <CallsTable />
-    </div>
+    </>
   );
 };
 

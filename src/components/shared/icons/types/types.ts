@@ -1,3 +1,3 @@
-import { IN_OUT } from '@/components/entities/calls';
+import { CallType } from '@/components/entities/calls';
 
-export type CallArrowIconProps = IN_OUT;
+export type CallArrowIconProps = CallType;

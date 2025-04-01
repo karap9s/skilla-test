@@ -13,7 +13,7 @@ const FilterCalls: FC = (): JSX.Element => {
   const updateFilter = callsStore.use.updateFilter();
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto mb-4 mt-10 flex justify-between items-center">
+    <div className="w-full max-w-[1440px] mx-auto mb-4 mt-20 flex justify-between items-center">
       <CallTypeFilter
         selectedType={filters.in_out}
         onTypeChange={(type) => {
